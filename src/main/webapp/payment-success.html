@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomor - Payment Successful</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lora', serif;
+    background: #0F0B08;
+    color: #F0E6D1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: #1A130E;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2E1F14;
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #F0E6D1;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #A89574;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #D17A2C;
+}
+
+/* ── Main Container ── */
+.container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.success-card {
+    background: #1A130E;
+    border: 1px solid #2E1F14;
+    border-radius: 12px;
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* ── Checkmark Animation ── */
+.checkmark-container {
+    margin-bottom: 40px;
+}
+
+.checkmark {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 30px;
+    border: 3px solid #D17A2C;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: scaleIn 0.6s ease-out;
+}
+
+.checkmark::after {
+    content: '';
+    width: 50px;
+    height: 25px;
+    border: 3px solid #D17A2C;
+    border-top: none;
+    border-right: none;
+    transform: rotate(-45deg);
+    animation: checkAnimation 0.6s ease-out 0.3s both;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes checkAnimation {
+    from {
+        width: 0;
+        height: 0;
+        border-width: 0;
+    }
+    to {
+        width: 50px;
+        height: 25px;
+        border-width: 3px;
+    }
+}
+
+/* ── Success Text ── */
+.success-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #F0E6D1;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.success-text p {
+    color: #A89574;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Order Details ── */
+.order-details {
+    background: #0F0B08;
+    border: 1px solid #2E1F14;
+    border-radius: 8px;
+    padding: 25px;
+    margin: 35px 0;
+    text-align: left;
+    animation: fadeInUp 0.8s ease-out 0.7s both;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2E1F14;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.detail-label {
+    color: #A89574;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    color: #D17A2C;
+    font-weight: 600;
+}
+
+.order-id {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+}
+
+/* ── Buttons ── */
+.button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    animation: fadeInUp 0.8s ease-out 0.9s both;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #D17A2C;
+    color: #F0E6D1;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: #A89574;
+    color: #F0E6D1;
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ── Success Message ── */
+.success-message {
+    background: rgba(209, 122, 44, 0.1);
+    border-left: 4px solid #D17A2C;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 25px;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.success-message p {
+    color: #D17A2C;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ── Responsive ── */
+@media(max-width: 768px) {
+    .navbar { padding: 16px 20px; }
+    .success-card { padding: 40px 25px; }
+    .success-text h1 { font-size: 2rem; }
+    .button-group { flex-direction: column; }
+    .checkmark { width: 80px; height: 80px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <a href="restaurants" class="brand">tomor</a>
+    <div class="nav-links">
+        <a href="restaurants">Restaurants</a>
+        <a href="Cart.jsp">Cart</a>
+    </div>
+</nav>
+
+<!-- ── Success Container ── -->
+<div class="container">
+    <div class="success-card">
+        
+        <!-- ── Checkmark Animation ── -->
+        <div class="checkmark-container">
+            <div class="checkmark"></div>
+        </div>
+        
+        <!-- ── Success Text ── -->
+        <div class="success-text">
+            <h1>Order Confirmed!</h1>
+            <p>Your payment has been processed successfully</p>
+        </div>
+        
+        <!-- ── Success Message ── -->
+        <div class="success-message">
+            <p>✓ You will receive your order within 30 minutes</p>
+        </div>
+        
+        <!-- ── Order Details ── -->
+        <div class="order-details">
+            <div class="detail-row">
+                <span class="detail-label">Order ID:</span>
+                <span class="detail-value order-id">#TOM-2024-001</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Total Amount:</span>
+                <span class="detail-value">₹890.00</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Delivery Time:</span>
+                <span class="detail-value">30 mins</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value" style="color: #4CAF50;">Confirmed</span>
+            </div>
+        </div>
+        
+        <!-- ── Buttons ── -->
+        <div class="button-group">
+            <a href="restaurants" class="btn btn-secondary">Continue Shopping</a>
+            <a href="view" class="btn btn-primary">View Orders</a>
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>
