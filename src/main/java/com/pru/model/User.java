@@ -2,17 +2,17 @@ package com.pru.model;
 import java.sql.Timestamp;
 
 public class User {
-    private int userId;          // was 'id' → match DB column user_id
-    private String username;     // was 'name' → match DB column username
+    private int userId;         
+    private String username;     
     private String password;
     private String email;
-    private String address;      // ✅ MISSING
-    private String role;         // ✅ MISSING (customer/admin)
-    private Timestamp createdDate; // ✅ MISSING
-    private Timestamp lastLogin;   // ✅ MISSING
+    private String address;     
+    private String role;         
+    private Timestamp createdDate; 
+    private Timestamp lastLogin;   
 
     public User() {}
- // Constructor WITHOUT userId (for INSERT — DB auto-generates it)
+ 
     public User(String username, String password, String email, String address, String role) {
         this.username = username;
         this.password = password;

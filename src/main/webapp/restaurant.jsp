@@ -55,11 +55,39 @@ body {
     color: #D17A2C;
 }
 
-/* ── Hero ── */
+/* ── Hero (video background) ── */
 .hero {
+    position: relative;
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 100px 20px 80px;
     border-bottom: 1px solid #2E1F14;
+    overflow: hidden;
+    height = 100px;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(15,11,8,0.55) 0%, rgba(15,11,8,0.85) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
@@ -70,7 +98,7 @@ body {
 }
 
 .hero p {
-    color: #A89574;
+    color: #E4D6B8;
     font-size: 1rem;
 }
 
@@ -204,9 +232,14 @@ body {
         gap: 15px;
     }
 
+    .hero { padding: 70px 20px 50px; }
     .hero h1 { font-size: 2rem; }
     .grid { padding: 20px; }
 }
+
+
+
+
 </style>
 </head>
 <body>
@@ -218,13 +251,23 @@ body {
         <a href="restaurants">Restaurants</a>
         <a href="login.html">Login</a>
         <a href="index.html">Register</a>
+      
+            <a href="login.html">Logout</a>
+        
     </div>
 </nav>
 
 <!-- ── Hero ── -->
 <div class="hero">
-    <h1>Explore Restaurants</h1>
-    <p>Discover the best food & drinks in your city.</p>
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="8094295-hd_1920_1080_25fps.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+        <h1>Explore Restaurants</h1>
+        <p>Discover the best food & drinks in your city.</p>
+    </div>
 </div>
 
 <!-- ── Cards ── -->
