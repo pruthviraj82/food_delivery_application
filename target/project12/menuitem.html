@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tomor - Menu</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lora', serif;
+    background: #0F0B08;
+    color: #F0E6D1;
+    min-height: 100vh;
+}
+
+/* ── Navbar ── */
+.navbar {
+    background: #1A130E;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2E1F14;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #F0E6D1;
+    text-decoration: none;
+}
+
+.nav-links a {
+    color: #A89574;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #D17A2C;
+}
+
+/* ── Hero ── */
+.hero {
+    text-align: center;
+    padding: 50px 20px 30px;
+    border-bottom: 1px solid #2E1F14;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #A89574;
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 8px 20px;
+    border: 1px solid #A89574;
+    color: #A89574;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    border-color: #D17A2C;
+    color: #D17A2C;
+}
+
+/* ── Grid ── */
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px;
+}
+
+/* ── Card ── */
+.card {
+    width: 300px;
+    background: #1A130E;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #2E1F14;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+.card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+    color: #F0E6D1;
+}
+
+.description {
+    color: #A89574;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #2E1F14;
+    margin: 12px 0;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #D17A2C;
+    font-weight: 700;
+}
+
+.item-id {
+    font-size: 0.8rem;
+    color: #A89574;
+}
+
+/* ── Quantity control ── */
+.qty-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0F0B08;
+    border: 1px solid #2E1F14;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.qty-btn {
+    background: none;
+    border: none;
+    color: #D17A2C;
+    font-size: 1.4rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.qty-btn:hover {
+    background: #2E1F14;
+}
+
+.qty-value {
+    font-size: 1rem;
+    color: #F0E6D1;
+    min-width: 30px;
+    text-align: center;
+}
+
+/* ── Add to cart button ── */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #D17A2C;
+    color: #F0E6D1;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+/* ── Empty state ── */
+.empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #A89574;
+    font-size: 1.1rem;
+}
+
+/* ── Cart bar ── */
+.cart-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #D17A2C;
+    color: #F0E6D1;
+    padding: 16px 40px;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    z-index: 200;
+}
+
+.cart-bar.show {
+    display: flex;
+}
+
+.cart-bar a {
+    color: #F0E6D1;
+    text-decoration: none;
+    background: #0F0B08;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+@media(max-width: 768px) {
+    .navbar { padding: 16px 20px; }
+    .hero h1 { font-size: 2rem; }
+    .grid { padding: 20px; }
+    .cart-bar { padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <a href="restaurants" class="brand">tomor</a>
+    <div class="nav-links">
+        <a href="restaurants">Restaurants</a>
+        <a href="login.html">Login</a>
+        <a href="register.html">Register</a>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+    <h1>Our Menu</h1>
+    <p>Fresh ingredients, amazing flavours.</p>
+    <a href="restaurants" class="back-btn">← Back to Restaurants</a>
+</div>
+
+<!-- ── Menu Grid ── -->
+<div class="grid">
+
+    <!-- Card 1 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400"
+             alt="Biryani">
+        <div class="card-body">
+            <h2>Chicken Biryani</h2>
+            <p class="description">
+                Fragrant basmati rice cooked with tender chicken,
+                whole spices and caramelised onions.
+            </p>
+            <hr class="divider">
+            <div class="price-row">
+                <span class="price">₹150</span>
+                <span class="item-id">Item #1</span>
+            </div>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <button class="btn" onclick="addToCart('Chicken Biryani', 150)">
+                Add to Order
+            </button>
+        </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400"
+             alt="Naan">
+        <div class="card-body">
+            <h2>Butter Naan</h2>
+            <p class="description">
+                Soft leavened bread baked in a tandoor,
+                finished with butter and fresh coriander.
+            </p>
+            <hr class="divider">
+            <div class="price-row">
+                <span class="price">₹50</span>
+                <span class="item-id">Item #2</span>
+            </div>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <button class="btn" onclick="addToCart('Butter Naan', 50)">
+                Add to Order
+            </button>
+        </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400"
+             alt="Lassi">
+        <div class="card-body">
+            <h2>Mango Lassi</h2>
+            <p class="description">
+                Chilled yoghurt blended with fresh Alphonso
+                mango pulp and a hint of cardamom.
+            </p>
+            <hr class="divider">
+            <div class="price-row">
+                <span class="price">₹80</span>
+                <span class="item-id">Item #3</span>
+            </div>
+            <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty(this, -1)">−</button>
+                <span class="qty-value">1</span>
+                <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+            </div>
+            <button class="btn" onclick="addToCart('Mango Lassi', 80)">
+                Add to Order
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- ── Cart Bar ── -->
+<div class="cart-bar" id="cartBar">
+    <span id="cartSummary">0 items — ₹0</span>
+    <a href="cart.html">View Order →</a>
+</div>
+
+<script>
+    // ── Quantity control ──────────────────────────
+    function changeQty(btn, delta) {
+        const qtyEl = btn.parentElement.querySelector('.qty-value');
+        let qty = parseInt(qtyEl.textContent);
+        qty = Math.max(1, qty + delta);
+        qtyEl.textContent = qty;
+    }
+
+    // ── Cart logic ────────────────────────────────
+    let cartItems = 0;
+    let cartTotal = 0;
+
+    function addToCart(name, price) {
+        const card   = event.target.closest('.card');
+        const qtyEl  = card.querySelector('.qty-value');
+        const qty    = parseInt(qtyEl.textContent);
+
+        cartItems += qty;
+        cartTotal += price * qty;
+
+        document.getElementById('cartSummary').textContent =
+            cartItems + ' item(s) — ₹' + cartTotal;
+
+        document.getElementById('cartBar').classList.add('show');
+
+        // Reset qty
+        qtyEl.textContent = 1;
+    }
+</script>
+
+</body>
+</html>
