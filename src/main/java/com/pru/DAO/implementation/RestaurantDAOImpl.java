@@ -9,7 +9,7 @@ import java.util.*;
 
 public class RestaurantDAOImpl implements RestaurantDAO {
 
-    // ── ADD ───────────────────────────────────────────────────
+
     @Override
     public void addRestaurant(Restaurant r) {
         String sql = "INSERT INTO restaurant (name, address, rating, is_active, image, delivery_time) " +
@@ -33,7 +33,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         }
     }
 
-    // ── UPDATE ────────────────────────────────────────────────
+   
     @Override
     public void updateRestaurant(Restaurant r) {
         String sql = "UPDATE restaurant SET name=?, address=?, rating=?, " +
@@ -58,7 +58,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         }
     }
 
-    // ── DELETE ────────────────────────────────────────────────
+   
     @Override
     public void deleteRestaurant(int restaurantId) {
         String sql = "DELETE FROM restaurant WHERE restaurant_id = ?";
@@ -76,7 +76,7 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         }
     }
 
-    // ── GET ONE ───────────────────────────────────────────────
+
     @Override
     public Restaurant getRestaurant(int restaurantId) {
         String sql = "SELECT * FROM restaurant WHERE restaurant_id = ?";
@@ -118,7 +118,6 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         return list;
     }
 
-    // ── ACTIVE ONLY ───────────────────────────────────────────
     @Override
     public List<Restaurant> getActiveRestaurants() {
         String sql = "SELECT * FROM restaurant WHERE is_active = true";
@@ -138,7 +137,6 @@ public class RestaurantDAOImpl implements RestaurantDAO {
         return list;
     }
 
-    // ── TOGGLE OPEN/CLOSE ─────────────────────────────────────
     @Override
     public void toggleStatus(int restaurantId, boolean status) {
         String sql = "UPDATE restaurant SET is_active = ? WHERE restaurant_id = ?";

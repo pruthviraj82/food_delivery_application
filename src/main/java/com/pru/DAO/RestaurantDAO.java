@@ -16,6 +16,6 @@ public interface RestaurantDAO {
     List<Restaurant> getAllRestaurants();
 
     // Extra useful methods for your app
-    List<Restaurant> getActiveRestaurants();        // only open ones
-    void toggleStatus(int restaurantId, boolean status); // open/close
+    List<Restaurant> getActiveRestaurants();        
+    void toggleStatus(int restaurantId, boolean status);
 }

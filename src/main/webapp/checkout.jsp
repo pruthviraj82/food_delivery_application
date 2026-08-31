@@ -11,12 +11,11 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
 
+<!-- ── Razorpay Script ── -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Lora', serif;
@@ -25,7 +24,6 @@ body {
     min-height: 100vh;
 }
 
-/* ── Navbar ── */
 .navbar {
     background: #1A130E;
     padding: 18px 40px;
@@ -54,11 +52,8 @@ body {
     transition: color 0.3s;
 }
 
-.nav-links a:hover {
-    color: #D17A2C;
-}
+.nav-links a:hover { color: #D17A2C; }
 
-/* ── Hero ── */
 .hero {
     text-align: center;
     padding: 40px 20px;
@@ -71,11 +66,8 @@ body {
     margin-bottom: 8px;
 }
 
-.hero p {
-    color: #A89574;
-}
+.hero p { color: #A89574; }
 
-/* ── Main Container ── */
 .main-container {
     max-width: 1200px;
     margin: 40px auto;
@@ -85,7 +77,6 @@ body {
     gap: 40px;
 }
 
-/* ── Form Section ── */
 .form-section {
     background: #1A130E;
     border: 1px solid #2E1F14;
@@ -100,9 +91,7 @@ body {
     color: #F0E6D1;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
+.form-group { margin-bottom: 20px; }
 
 .form-group label {
     display: block;
@@ -133,15 +122,13 @@ body {
     box-shadow: 0 0 5px rgba(209, 122, 44, 0.3);
 }
 
-.form-group textarea {
-    resize: vertical;
-    min-height: 80px;
-}
+.form-group textarea { resize: vertical; min-height: 80px; }
 
 .payment-methods {
     display: flex;
     gap: 15px;
     margin-top: 12px;
+    flex-wrap: wrap;
 }
 
 .radio-label {
@@ -157,9 +144,18 @@ body {
     width: auto;
     margin: 0;
     cursor: pointer;
+    accent-color: #D17A2C;
 }
 
-/* ── Order Summary Section ── */
+/* Razorpay option highlight */
+.radio-label.razorpay-label {
+    color: #D17A2C;
+    font-weight: 600;
+    border: 1px solid #D17A2C;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
 .summary-section {
     background: #1A130E;
     border: 1px solid #2E1F14;
@@ -177,7 +173,6 @@ body {
     color: #F0E6D1;
 }
 
-/* ── Items List ── */
 .items-list {
     border-bottom: 1px solid #2E1F14;
     padding-bottom: 20px;
@@ -192,9 +187,7 @@ body {
     border-bottom: 1px solid #2E1F14;
 }
 
-.item-details {
-    flex: 1;
-}
+.item-details { flex: 1; }
 
 .item-name {
     font-family: 'Playfair Display', serif;
@@ -204,14 +197,9 @@ body {
     margin-bottom: 5px;
 }
 
-.item-qty {
-    color: #A89574;
-    font-size: 0.9rem;
-}
+.item-qty { color: #A89574; font-size: 0.9rem; }
 
-.item-price {
-    text-align: right;
-}
+.item-price { text-align: right; }
 
 .item-price-val {
     color: #D17A2C;
@@ -219,15 +207,9 @@ body {
     display: block;
 }
 
-.item-unit {
-    color: #A89574;
-    font-size: 0.9rem;
-}
+.item-unit { color: #A89574; font-size: 0.9rem; }
 
-/* ── Charges ── */
-.charges {
-    margin-bottom: 20px;
-}
+.charges { margin-bottom: 20px; }
 
 .charge-row {
     display: flex;
@@ -236,21 +218,9 @@ body {
     font-size: 0.95rem;
 }
 
-.charge-row span:first-child {
-    color: #A89574;
-}
+.charge-row span:first-child { color: #A89574; }
+.charge-row span:last-child { color: #F0E6D1; font-weight: 600; }
 
-.charge-row span:last-child {
-    color: #F0E6D1;
-    font-weight: 600;
-}
-
-.charge-row.platform,
-.charge-row.delivery {
-    padding: 8px 0;
-}
-
-/* ── Total ── */
 .total-section {
     border-top: 2px solid #D17A2C;
     padding-top: 20px;
@@ -266,19 +236,10 @@ body {
     font-weight: 700;
 }
 
-.total-row span:first-child {
-    color: #F0E6D1;
-}
+.total-row span:first-child { color: #F0E6D1; }
+.total-row span:last-child { color: #D17A2C; }
 
-.total-row span:last-child {
-    color: #D17A2C;
-}
-
-/* ── Buttons ── */
-.button-group {
-    display: flex;
-    gap: 15px;
-}
+.button-group { display: flex; gap: 15px; }
 
 .btn {
     flex: 1;
@@ -290,37 +251,35 @@ body {
     font-size: 1rem;
     font-weight: 600;
     transition: 0.3s;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
-.btn-submit {
-    background: #D17A2C;
-    color: #F0E6D1;
-}
+.btn-submit { background: #D17A2C; color: #F0E6D1; }
+.btn-submit:hover { opacity: 0.9; transform: translateY(-2px); }
+.btn-back { background: #A89574; color: #F0E6D1; }
+.btn-back:hover { opacity: 0.9; }
 
-.btn-submit:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
+/* ── Error message ── */
+.error-msg {
+    background: rgba(209, 50, 50, 0.15);
+    border: 1px solid #D13232;
+    color: #E57373;
+    padding: 12px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    display: none;
 }
+.error-msg.show { display: block; }
 
-.btn-back {
-    background: #A89574;
-    color: #F0E6D1;
-}
+/* ── Hidden form for verify ── */
+#verifyForm { display: none; }
 
-.btn-back:hover {
-    opacity: 0.9;
-}
-
-/* ── Responsive ── */
 @media(max-width: 992px) {
-    .main-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .summary-section {
-        position: static;
-        top: auto;
-    }
+    .main-container { grid-template-columns: 1fr; }
+    .summary-section { position: static; }
 }
 
 @media(max-width: 768px) {
@@ -348,72 +307,75 @@ body {
     <p>Complete your order</p>
 </div>
 
+<!-- ── Calculate total for Razorpay ── -->
+<%
+    Cart cart = (Cart) session.getAttribute("cart");
+    double subtotal = 0;
+    if (cart != null && !cart.isEmpty()) {
+        for (CartItem item : cart.getItems()) {
+            subtotal += item.getPrice() * item.getQuantity();
+        }
+    }
+    double grandTotal = subtotal + 40 + 50;
+%>
+
 <!-- ── Main Container ── -->
 <div class="main-container">
 
     <!-- ── FORM SECTION ── -->
-    <form class="form-section">
+    <div class="form-section">
         <h2>Delivery Details</h2>
-        
+
+        <!-- Error message -->
+        <div class="error-msg" id="errorMsg">Please fill all fields before proceeding.</div>
+
         <div class="form-group">
             <label for="name">Full Name *</label>
             <input type="text" id="name" name="name" required>
         </div>
-        
+
         <div class="form-group">
             <label for="email">Email Address *</label>
             <input type="email" id="email" name="email" required>
         </div>
-        
+
         <div class="form-group">
             <label for="phone">Phone Number *</label>
             <input type="tel" id="phone" name="phone" placeholder="10 digit number" required>
         </div>
-        
+
         <div class="form-group">
             <label for="address">Delivery Address *</label>
             <textarea id="address" name="address" required></textarea>
         </div>
-        
+
         <div class="form-group">
             <label>Payment Method *</label>
             <div class="payment-methods">
-                <label class="radio-label">
-                    <input type="radio" name="paymentMethod" value="credit_card" required>
-                    Credit Card
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="paymentMethod" value="debit_card">
-                    Debit Card
-                </label>
-                <label class="radio-label">
-                    <input type="radio" name="paymentMethod" value="upi">
-                    UPI
+                <label class="radio-label razorpay-label">
+                    <input type="radio" name="paymentMethod" value="razorpay" checked>
+                    💳 Pay Online (Razorpay)
                 </label>
                 <label class="radio-label">
                     <input type="radio" name="paymentMethod" value="cod">
-                    Cash on Delivery
+                    🏠 Cash on Delivery
                 </label>
             </div>
         </div>
-    </form>
+    </div>
 
     <!-- ── ORDER SUMMARY SECTION ── -->
     <div class="summary-section">
         <h2>Order Summary</h2>
-        
+
         <%
-            Cart cart = (Cart) session.getAttribute("cart");
-            double subtotal = 0;
-            
             if (cart != null && !cart.isEmpty()) {
         %>
-        
+
         <div class="items-list">
             <%
                 for (CartItem item : cart.getItems()) {
                     double itemTotal = item.getPrice() * item.getQuantity();
-                    subtotal += itemTotal;
             %>
             <div class="item-row">
                 <div class="item-details">
@@ -429,41 +391,44 @@ body {
                 }
             %>
         </div>
-        
+
         <div class="charges">
             <div class="charge-row">
                 <span>Subtotal</span>
                 <span>₹<%= String.format("%.2f", subtotal) %></span>
             </div>
-            <div class="charge-row platform">
+            <div class="charge-row">
                 <span>Platform Fee</span>
                 <span>₹40</span>
             </div>
-            <div class="charge-row delivery">
+            <div class="charge-row">
                 <span>Delivery Fee</span>
                 <span>₹50</span>
             </div>
         </div>
-        
+
         <div class="total-section">
             <div class="total-row">
                 <span>Grand Total</span>
-                <span>₹<%= String.format("%.2f", subtotal + 40 + 50) %></span>
+                <span>₹<%= String.format("%.2f", grandTotal) %></span>
             </div>
         </div>
-        
+
         <div class="button-group">
             <a href="Cart.jsp" class="btn btn-back">← Back to Cart</a>
-            <form method="post" action="checkout">
-    <!-- keep all your existing input fields inside this form -->
-    <button type="submit" class="btn btn-submit">Proceed →</button>
-</form>        </div>
-        
+            <button type="button" class="btn btn-submit" onclick="proceedToPayment()">
+                Proceed →
+            </button>
+        </div>
+
         <%
             } else {
         %>
         <p style="color: #A89574; text-align: center; padding: 40px;">Your cart is empty</p>
-        <a href="restaurants" class="btn btn-submit" style="display: block; text-align: center; text-decoration: none;">Browse Restaurants</a>
+        <a href="restaurants" class="btn btn-submit"
+           style="display: block; text-align: center; text-decoration: none;">
+            Browse Restaurants
+        </a>
         <%
             }
         %>
@@ -471,21 +436,109 @@ body {
 
 </div>
 
+<!-- ── Hidden form to submit to verifyPayment servlet ── -->
+<form id="verifyForm" action="verifyPayment" method="post">
+    <input type="hidden" id="razorpay_payment_id"  name="razorpay_payment_id">
+    <input type="hidden" id="razorpay_order_id"    name="razorpay_order_id">
+    <input type="hidden" id="razorpay_signature"   name="razorpay_signature">
+    <input type="hidden" id="hidden_phone"         name="phone">
+    <input type="hidden" id="hidden_address"       name="address">
+</form>
+
+<!-- ── Hidden form for COD ── -->
+<form id="codForm" action="checkout" method="post">
+    <input type="hidden" id="cod_name"          name="name">
+    <input type="hidden" id="cod_email"         name="email">
+    <input type="hidden" id="cod_phone"         name="phone">
+    <input type="hidden" id="cod_address"       name="address">
+    <input type="hidden" name="paymentMethod"   value="Cash on Delivery">
+</form>
+
 <script>
 function proceedToPayment() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const address = document.getElementById('address').value;
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
-    
-    if (!name || !email || !phone || !address || !paymentMethod) {
-        alert('Please fill all fields');
+
+    // ── Validate all fields ──
+    const name    = document.getElementById('name').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const phone   = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const payment = document.querySelector('input[name="paymentMethod"]:checked');
+
+    if (!name || !email || !phone || !address || !payment) {
+        document.getElementById('errorMsg').classList.add('show');
         return;
     }
-    
-    // Redirect to payment success page
-    window.location.href = 'payment-success.html';
+
+    document.getElementById('errorMsg').classList.remove('show');
+
+    const paymentMethod = payment.value;
+
+    // ── COD — submit directly to checkout servlet ──
+    if (paymentMethod === 'cod') {
+        document.getElementById('cod_name').value    = name;
+        document.getElementById('cod_email').value   = email;
+        document.getElementById('cod_phone').value   = phone;
+        document.getElementById('cod_address').value = address;
+        document.getElementById('codForm').submit();
+        return;
+    }
+
+    // ── Razorpay — create order first ──
+    const totalAmount = <%= grandTotal %>;
+
+    fetch('createRazorpayOrder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'amount=' + totalAmount
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.error) {
+            alert('Payment error: ' + data.error);
+            return;
+        }
+
+        // ── Open Razorpay popup ──
+        var options = {
+            key: 'rzp_test_TD6Engm1YHy8pB',
+            amount: data.amount,
+            currency: data.currency,
+            name: 'Tomor',
+            description: 'Food Order Payment',
+            order_id: data.orderId,
+            handler: function(response) {
+                // ── Payment success — submit to verify servlet ──
+                document.getElementById('razorpay_payment_id').value = response.razorpay_payment_id;
+                document.getElementById('razorpay_order_id').value   = response.razorpay_order_id;
+                document.getElementById('razorpay_signature').value  = response.razorpay_signature;
+                document.getElementById('hidden_phone').value        = phone;
+                document.getElementById('hidden_address').value      = address;
+                document.getElementById('verifyForm').submit();
+            },
+            prefill: {
+                name:  name,
+                email: email,
+                contact: phone
+            },
+            theme: {
+                color: '#D17A2C'
+            },
+            modal: {
+                ondismiss: function() {
+                    alert('Payment cancelled. Please try again.');
+                }
+            }
+        };
+
+        var rzp = new Razorpay(options);
+        rzp.open();
+
+    })
+    .catch(err => {
+        console.error('Error:', err);
+        alert('Something went wrong. Please try again.');
+    });
 }
 </script>
 

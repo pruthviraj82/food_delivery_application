@@ -328,7 +328,7 @@ body {
     <!-- ── ADD Form ── -->
     <div class="add-form" id="addForm">
         <h3>Add New Menu Item</h3>
-        <form action="adminMenu" >
+        <form action="adminMenu" method = "post" >
             <input type="hidden" name="action" value="add">
             <input type="hidden" name="restaurantId" value="<%= restaurantId %>">
             <div class="form-grid">
@@ -359,7 +359,7 @@ body {
     <!-- ── EDIT Form ── -->
     <div class="edit-form" id="editForm">
         <h3>Edit Menu Item</h3>
-        <form action="adminMenu" >
+        <form action="adminMenu" method = "post"  >
             <input type="hidden" name="action" value="update">
             <input type="hidden" name="restaurantId" value="<%= restaurantId %>">
             <input type="hidden" name="itemId" id="editItemId">
@@ -430,7 +430,7 @@ body {
                     )">Edit</button>
 
                     <!-- ── Delete ── -->
-                    <form action="adminMenu"  style="flex:1;"
+                    <form action="adminMenu" method = "post" style="flex:1;"
                           onsubmit="return confirm('Delete <%= item.getName().replace("'", "\\'") %>?')">
                         <input type="hidden" name="action" value="delete">
                         <input type="hidden" name="itemId" value="<%= item.getItemId() %>">

@@ -480,7 +480,7 @@ body {
                 <h2><%= item.getName() %></h2>
                 <p class="card-desc"><%= item.getDescription() %></p>
                 <div class="card-footer">
-                    <form action="cart" method="post" class="add-form"
+                    <form action="cart" class="add-form"
                           onsubmit="onAddToCart(event, '<%= item.getName() %>', <%= item.getPrice() %>)">
                         <input type="hidden" name="action"       value="add">
                         <input type="hidden" name="itemId"       value="<%= item.getItemId() %>">
