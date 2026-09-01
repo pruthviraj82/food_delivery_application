@@ -11,12 +11,22 @@ public class DBConnection {
 
 	    // Static method — call without creating object
 	    public static Connection getConnection() {
+
 	        try {
+
 	            Class.forName("com.mysql.cj.jdbc.Driver");
+
 	            con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+	            System.out.println("DATABASE CONNECTED SUCCESSFULLY");
+
 	        } catch (ClassNotFoundException | SQLException e) {
+
+	            System.out.println("DATABASE CONNECTION FAILED");
 	            e.printStackTrace();
+
 	        }
+
 	        return con;
 	    }
 
