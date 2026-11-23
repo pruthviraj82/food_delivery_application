@@ -237,12 +237,42 @@ body {
     .grid { padding: 20px; }
 }
 
+/* ── Mood Suggest ── */
+.mood-box { max-width:1400px; margin:30px auto 0; padding:0 50px; }
+.mood-panel { background:#1A130E; border:1px solid #2E1F14; border-radius:6px; padding:24px; }
+.mood-panel h2 { font-family:'Playfair Display',serif; font-size:1.5rem; margin-bottom:6px; }
+.mood-panel p.sub { color:#A89574; font-size:0.9rem; margin-bottom:16px; }
+.chips { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+.chip { background:#0F0B08; border:1px solid #2E1F14; color:#F0E6D1; padding:8px 16px;
+        border-radius:20px; cursor:pointer; font-family:'Lora',serif; font-size:0.9rem; transition:0.2s; }
+.chip:hover { border-color:#D17A2C; color:#D17A2C; }
+.mood-row { display:flex; gap:10px; }
+.mood-row input { flex:1; padding:12px; background:#0F0B08; border:1px solid #2E1F14;
+        color:#F0E6D1; border-radius:4px; font-family:'Lora',serif; outline:none; }
+.mood-row input:focus { border-color:#D17A2C; }
+.mood-row button { padding:12px 24px; background:#D17A2C; color:#F0E6D1; border:none;
+        border-radius:4px; cursor:pointer; font-weight:600; font-family:'Lora',serif; }
+#moodStatus { color:#A89574; margin-top:14px; font-size:0.9rem; }
+#moodResults { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; margin-top:18px; }
+.sug-card { background:#0F0B08; border:1px solid #2E1F14; border-radius:6px; overflow:hidden; }
+.sug-card img { width:100%; height:130px; object-fit:cover; }
+.sug-body { padding:14px; }
+.sug-body h3 { font-family:'Playfair Display',serif; font-size:1.05rem; margin-bottom:4px; }
+.sug-rest { color:#A89574; font-size:0.8rem; margin-bottom:8px; }
+.sug-reason { font-size:0.85rem; font-style:italic; color:#E4D6B8; margin-bottom:10px; }
+.sug-price { color:#D17A2C; font-weight:700; margin-bottom:10px; }
+.sug-body button { width:100%; padding:9px; background:#D17A2C; color:#F0E6D1; border:none;
+        border-radius:4px; cursor:pointer; font-weight:600; font-family:'Lora',serif; }
+@media(max-width:768px){ .mood-box{padding:0 20px;} .mood-row{flex-direction:column;} }
+
 
 
 
 </style>
 </head>
 <body>
+
+
 
 <!-- ── Navbar ── -->
 <nav class="navbar">
@@ -268,6 +298,30 @@ body {
         <h1>Explore Restaurants</h1>
         <p>Discover the best food & drinks in your city.</p>
     </div>
+</div>
+
+
+
+
+<div class="mood-box">
+  <div class="mood-panel">
+    <h2>🍽 What's your mood today?</h2>
+    <p class="sub">Tell us how you feel and our AI will pick dishes for you.</p>
+    <div class="chips">
+      <button class="chip" onclick="askMood('Happy and celebrating')">😄 Happy</button>
+      <button class="chip" onclick="askMood('Stressed and need comfort food')">😣 Stressed</button>
+      <button class="chip" onclick="askMood('Tired and low energy')">😴 Tired</button>
+      <button class="chip" onclick="askMood('Sad and need cheering up')">😢 Sad</button>
+      <button class="chip" onclick="askMood('Cold rainy weather')">🌧 Rainy day</button>
+      <button class="chip" onclick="askMood('Very hungry, want something heavy')">🤤 Very hungry</button>
+    </div>
+    <div class="mood-row">
+      <input type="text" id="moodInput" maxlength="100" placeholder="Or type your own mood...">
+      <button onclick="askMood(document.getElementById('moodInput').value)">Suggest</button>
+    </div>
+    <div id="moodStatus"></div>
+    <div id="moodResults"></div>
+  </div>
 </div>
 
 <!-- ── Cards ── -->
@@ -332,5 +386,68 @@ body {
 %>
 
 </div>
+
+
+<script>
+function askMood(mood) {
+    mood = (mood || '').trim();
+    const status = document.getElementById('moodStatus');
+    const box = document.getElementById('moodResults');
+    if (!mood) { status.textContent = 'Please type or pick a mood.'; return; }
+
+    status.textContent = 'Thinking about the perfect meal for you...';
+    box.innerHTML = '';
+
+    fetch('moodSuggest', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'mood=' + encodeURIComponent(mood)
+    })
+    .then(r => r.json().then(d => ({ ok: r.ok, status: r.status, d })))
+    .then(({ ok, status: code, d }) => {
+        if (code === 401) { window.location.href = 'login.html'; return; }
+        if (!ok) { status.textContent = d.error || 'Something went wrong.'; return; }
+        if (!d.suggestions.length) { status.textContent = 'No suggestions found. Try another mood.'; return; }
+        status.textContent = 'Here is what we suggest for "' + mood + '":';
+        d.suggestions.forEach(s => box.appendChild(buildCard(s)));
+    })
+    .catch(() => { status.textContent = 'Network error. Please try again.'; });
+}
+
+function buildCard(s) {
+    const card = document.createElement('div');
+    card.className = 'sug-card';
+
+    if (s.image) {
+        const img = document.createElement('img');
+        img.src = s.image; img.alt = s.name;
+        card.appendChild(img);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'sug-body';
+
+    const h = document.createElement('h3');   h.textContent = s.name;
+    const r = document.createElement('div');  r.className = 'sug-rest';   r.textContent = s.restaurantName;
+    const why = document.createElement('div'); why.className = 'sug-reason'; why.textContent = s.reason;
+    const p = document.createElement('div');  p.className = 'sug-price';  p.textContent = '₹' + s.price;
+
+    // Uses your existing /cart servlet
+    const form = document.createElement('form');
+    form.action = 'cart';
+    [['action','add'],['itemId',s.itemId],['restaurantId',s.restaurantId],['quantity',1]].forEach(([n,v]) => {
+        const i = document.createElement('input');
+        i.type = 'hidden'; i.name = n; i.value = v;
+        form.appendChild(i);
+    });
+    const btn = document.createElement('button');
+    btn.type = 'submit'; btn.textContent = 'Add to Order';
+    form.appendChild(btn);
+
+    [h, r, why, p, form].forEach(el => body.appendChild(el));
+    card.appendChild(body);
+    return card;
+}
+</script>
 </body>
 </html>
